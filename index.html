@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home Automation with Electric Imp</title>
+  	<meta name="robots" content="noodp"/>
+  	<meta name="description" content="A demo page using getbootstrap template" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Home Automation with Electric Imp</a>
+        </div>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Home Automation</h1>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Lights</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <div class="btn-group btn-group-lg" data-toggle="buttons" aria-label="...">
+            <label id="l1" class="btn btn-default">
+              <input type="radio" name="lights" autocomplete="off"> On
+            </label>
+            <label id="l2" class="btn btn-default">
+              <input type="radio" name="lights" autocomplete="off"> Off
+            </label>
+          </div>
+          <hr>
+          <p>server confirmed: <span id="light-confirm"></span></p>
+          <hr>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Dashboard:</h3>
+            </div>
+            <div class="panel-body">
+              <h4>Lux Level: <span id="light-resp"></span></h4>
+              <h4>Status: <span id="light-stat"></span></h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h2>Heating</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <div class="btn-group btn-group-lg" data-toggle="buttons" aria-label="...">
+            <label id="h1" class="btn btn-default">
+              <input type="radio" name="heat" autocomplete="off"> On
+            </label>
+            <label id="h2" class="btn btn-default">
+              <input type="radio" name="heat" autocomplete="off"> Off
+            </label>
+          </div>
+          <hr>
+          <p>server confirmed: <span id="heat-confirm"></span></p>
+          <hr>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Dashboard:</h3>
+            </div>
+            <div class="panel-body">
+              <h4>Temperature: <span id="temp-resp"></span>&deg;C</h4>
+              <h4>Humidity: <span id="humid-resp"></span>%</h4>
+              <h4>Status: <span id="heat-stat"></span></h4>
+            </div>
+          </div>
+       </div>
+       <div class="col-md-4">
+          <h2>Alarm</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <div class="btn-group btn-group-lg" data-toggle="buttons" aria-label="...">
+            <label id="a1" class="btn btn-default">
+              <input type="radio" name="alarm" autocomplete="off"> On
+            </label>
+            <label id="a2" class="btn btn-default">
+              <input type="radio" name="alarm" autocomplete="off"> Off
+            </label>
+          </div>
+          <hr>
+          <p>server confirmed: <span id="alarm-confirm"></span></p>
+          <hr>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Dashboard:</h3>
+            </div>
+            <div class="panel-body">
+              <h4>Last Alarm: <span id="alarm-resp"></span></h4>
+              <h4>Location: <span id="alarm-locat"></span></h4>
+              <h4>Status: <span id="alarm-stat"></span></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 Gerrikoio - MIT License: Free to use.</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      /*
+      Copyright (c) 2017 Gerrikoio
+
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
+
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+      */
+      
+      $(document).ready(function() {
+        'use strict';
+        const URL1 = "https://agent.electricimp.com/aWbnQBCsu2K8";                   // Set this for column 1: Lights
+        const URL2 = "https://agent.electricimp.com/aWbnQBCsu2K8";                   // Set this for column 2: Heating
+        const URL3 = "https://agent.electricimp.com/aWbnQBCsu2K8";                   // Set this for column 3: Alarms
+        const gTIMEOUT = 3000;
+        const gINTERVAL = 30000;
+
+        var params = ["","","","",""];    // path, mode, url, status, method
+        // use ajax to grab the initial states
+        function GetLightParams() {
+          params[0] = "/lights";
+          params[1] = "l";       // l = lights
+          params[2] = URL1;         // assign your agent url of choice with optional path (if using same agent url)
+          params[3] = "all";
+          params[4] = "GET";
+          var startTime = (new Date()).getTime();
+          post2ImpAgent(params);
+          var canPoll = ((new Date).getTime() - startTime ) <= gTIMEOUT;
+          return canPoll;
+        }
+
+        function GetHeatingParams() {
+          params[0] = "/heat";
+          params[1] = "h";       // l = lights
+          params[2] = URL2;         // assign your agent url of choice with optional path (if using same agent url)
+          params[3] = "all";
+          params[4] = "GET";
+          var startTime = (new Date()).getTime();
+          post2ImpAgent(params);
+          var canPoll = ((new Date).getTime() - startTime ) <= gTIMEOUT;
+          return canPoll;
+        }
+
+        function GetAlarmParams() {
+          params[0] = "/alarm";
+          params[1] = "a";       // l = lights
+          params[2] = URL3;         // assign your agent url of choice with optional path (if using same agent url)
+          params[3] = "all";
+          params[4] = "GET";
+          var startTime = (new Date()).getTime();
+          post2ImpAgent(params);
+          var canPoll = ((new Date).getTime() - startTime ) <= gTIMEOUT;
+          return canPoll;
+        }
+
+        //button click handlers
+        $("#l1").click(function() {
+          if ($("#l1").hasClass("active")) console.log( "lights already clicked on - so ignore" );
+          if ($("#l2").hasClass("active")) {
+            console.log( "lights clicked on" );
+            params[0] = "/lights";
+            params[1] = "l";       // l = lights
+            params[2] = URL1;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "2";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+        $("#l2").click(function() {
+          if ($("#l2").hasClass("active")) console.log( "lights already clicked off - so ignore" );
+          if ($("#l1").hasClass("active")) {
+            console.log( "lights clicked off" );
+            params[0] = "/lights";
+            params[1] = "l";       // l = lights
+            params[2] = URL1;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "1";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+        $("#h1").click(function() {
+          if ($("#h1").hasClass("active")) console.log( "heat already clicked on - so ignore" );
+          if ($("#h2").hasClass("active")) {
+            console.log( "heat clicked on" );
+            params[0] = "/heat";
+            params[1] = "h";       // l = lights
+            params[2] = URL2;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "2";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+        $("#h2").click(function() {
+          if ($("#h2").hasClass("active")) console.log( "heat already clicked off - so ignore" );
+          if ($("#h1").hasClass("active")) {
+            console.log( "heat clicked off" );
+            params[0] = "/heat";
+            params[1] = "h";       // l = lights
+            params[2] = URL2;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "1";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+        $("#a1").click(function() {
+          if ($("#a1").hasClass("active")) console.log( "alarm already clicked on - so ignore" );
+          if ($("#a2").hasClass("active")) {
+            console.log( "alarm clicked on" );
+            params[0] = "/alarm";
+            params[1] = "a";       // l = lights
+            params[2] = URL3;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "2";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+        $("#a2").click(function() {
+          if ($("#a2").hasClass("active")) console.log( "alarm already clicked off - so ignore" );
+          if ($("#a1").hasClass("active")) {
+            console.log( "alarm clicked off" );
+            params[0] = "/alarm";
+            params[1] = "a";       // l = lights
+            params[2] = URL3;         // assign your agent url of choice with optional path (if using same agent url)
+            params[3] = "1";       // assume 2 = on and 1 = off;
+            params[4] = "POST";
+            post2ImpAgent(params);
+          }
+        });
+
+        function post2ImpAgent(p) {
+          // we typically use post method to creat or update a change in status
+          if (p[4] == "POST") {
+            var obj = p[1] +"="+ p[3];
+            $.ajax({
+                url : p[2] + p[0],
+                type: 'POST',
+                data: obj
+            })
+            .done(function(response) {
+              console.log(response);
+              if (p[1] == "l") {
+                $('#light-confirm').html(response);
+              }
+              else if (p[1] == "h") {
+                $('#heat-confirm').html(response);
+              }
+              else if (p[1] == "a") {
+                $('#alarm-confirm').html(response);
+              }
+            });
+          }
+          else if (p[4] == "GET") {
+            // we typically use get method to retrieve information
+            // we will use this option to poll the servers to get regular upates
+            $.ajax({
+                url : p[2] + p[0] + "?" + p[1] + "=" + p[3],
+                type: 'GET'
+            })
+            .done(function(response) {
+              console.log(response);
+              var data = $.parseJSON(response);
+              if (p[1] == "l") {
+                $('#light-resp').html(data.v1);
+                $('#light-stat').html(data.v3);
+              }
+              else if (p[1] == "h") {
+                $('#temp-resp').html(data.v1);
+                $('#humid-resp').html(data.v2);
+                $('#heat-stat').html(data.v3);
+              }
+              else if (p[1] == "a") {
+                $('#alarm-resp').html(data.v1);
+                $('#alarm-locat').html(data.v2);
+                $('#alarm-stat').html(data.v3);
+              }
+            });
+          }
+        }
+
+        function pollFunc(fn) {
+            (function p() {
+                if (fn())  setTimeout(p, gINTERVAL); // ensures the function exucutes
+            })();
+        }
+
+        //Initialise switches - assume off (except alarm)
+        $('#l2').addClass('active');
+        $('#h2').addClass('active');
+        $('#a1').addClass('active');
+
+        setTimeout(function() { pollFunc(GetLightParams); }, 500);
+        setTimeout(function() { pollFunc(GetHeatingParams); }, 750);
+        setTimeout(function() { pollFunc(GetAlarmParams); }, 1000);
+
+      });
+    </script>
+  </body>
+</html>

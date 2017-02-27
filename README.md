@@ -3,4 +3,4 @@ A standard bootstrap template customised to auto grab status data using JQuery +
 
 The Index.html can work as is on a laptop / pc. No need to use local server or upload to a web server. The html uses CDN references to latest JQuery and Bootstrap CSS + JS. There is no other CSS used. The customer JQuery code is appended at the bottom within script tags. You will need to amend the URL references to the Imp Agent within these script tags. There are 3 constants URL1, URL2, URL3. These can be different URLs or the same.
 
-The Imp agent code is just the snippet handling the http requests. It is up to you to insert and handle device communication etc.
+The Imp agent code is just the snippet handling the http requests. For the sake of testing / demo is just uses Time (seconds) to represent sensor values. It is up to you to change this and handle device communication etc.
